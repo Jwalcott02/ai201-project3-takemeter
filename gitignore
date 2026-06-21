@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb
+
+# API keys / secrets
+.env
+*.env
+secrets.json
+credentials.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model artifacts (too large for GitHub)
+*.bin
+*.pt
+*.safetensors
+model/
+fine_tuned_model/
+
+# Dataset files (keep CSV, ignore raw scrape dumps)
+raw_scrape*.json
+raw_scrape*.csv
+
+# Logs
+*.log
+runs/
