@@ -104,6 +104,55 @@ These rules apply when a post is ambiguous:
 - **Target:** ~300 posts (buffer for filtering down to 200 labeled examples)
 - **Planned split:** 140 train / 30 validation / 30 test (70/15/15)
 - **Label distribution target:** ~100 examples per label (50/50 balance)
+- **If a label is underrepresented:** pull additional posts from specific thread types
+  (e.g. game threads for HOT_TAKE, stats/discussion threads for ANALYSIS) until balance
+  is restored.
+
+---
+
+### Evaluation Metrics
+
+Accuracy alone isn't enough because you need to see how the model handles each class
+specifically and where it is getting confused. F1 score is the right metric because it
+combines both precision and recall evenly — since both types of errors (missing a
+HOT_TAKE or mislabeling an ANALYSIS) are equally costly for this task. The confusion
+matrix shows exactly where the model is getting confused between the two labels.
+
+**Metrics to report:**
+- Overall accuracy (both fine-tuned model and Groq zero-shot baseline)
+- F1 score per label (ANALYSIS and HOT_TAKE)
+- Confusion matrix
+- At least 3 specific wrong predictions with analysis of why
+
+---
+
+### Definition of Success
+
+My definition of success is an F1 score of 80% or above. This is high enough to be
+genuinely useful — wrong only 2 in 10 times — while remaining realistic given only 200
+labeled examples. For a subjective task like classifying r/nba posts, a score above 90%
+would actually be suspicious, suggesting the model memorized the training data rather
+than learning the pattern.
+
+---
+
+### AI Tool Plan
+
+**Label stress-testing:**
+I will use an AI tool to stress-test my labels by generating posts that sit on the
+boundary between ANALYSIS and HOT_TAKE. If I can't classify them cleanly, I will tighten
+the label definitions and add a new labeling rule before annotating 200 examples.
+
+**Annotation assistance:**
+I will use Groq to pre-label my 200 posts by feeding each post along with my label
+definitions and labeling rules, then I will review every prediction myself to catch
+mistakes and fix edge cases. I will track which examples were pre-labeled by Groq for
+disclosure in my AI usage section.
+
+**Failure analysis:**
+After training, I will feed my wrong predictions to an AI tool to identify patterns, and
+then I will verify those patterns myself by double checking and seeing if I can agree with
+the patterns that the AI tool noticed.
 
 ---
 
