@@ -15,6 +15,23 @@ The goal is to capture a real distinction in online sports discourse: the differ
 
 ---
 
+
+## Demo Video
+
+<div>
+    <a href="https://www.loom.com/share/5cd8b0d3dbf744c395e5a93e50f91d13">
+      <p>TakeMeter - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/5cd8b0d3dbf744c395e5a93e50f91d13">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/5cd8b0d3dbf744c395e5a93e50f91d13-84ef73446e75eec3-full-play.gif#t=0.1">
+    </a>
+  </div>
+
+
+The demo shows the fine-tuned model classifying r/nba comments live, including one correct prediction with narration and one failure case with analysis of what went wrong, followed by a walkthrough of the evaluation report.
+
+
+
 ## Community
 
 **r/nba** — Reddit's primary NBA discussion community with millions of members. Chosen because the ANALYSIS vs HOT_TAKE distinction is both meaningful and genuinely difficult here. The community produces a natural mix of evidence-based arguments (film breakdowns, stat comparisons, historical context) and confident assertions (player rankings, legacy debates, game reactions), making it a rich and challenging classification target.
