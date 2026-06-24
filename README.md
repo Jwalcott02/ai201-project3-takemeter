@@ -148,4 +148,20 @@ The fine-tuned model made 9 errors, all in the same direction: true ANALYSIS pre
 > *"No one's ever had to do this by the way. Of all of the 70+ games in the recent past, no player has had to explain themselves as to why they scored that much instead of getting subbed out."*  
 > True: analysis | Predicted: hot_take | Confidence: 0.52
 
-This is ANALYSIS because it makes a specific historical claim (no player in any 70+ point game has ever been asked to justify their scoring). The model likely flagged it as HOT_TAKE because the phrasing is assertive and
+This is ANALYSIS because it makes a specific historical claim (no player in any 70+ point game has ever been asked to justify their scoring). The model likely flagged it as HOT_TAKE because the phrasing is assertive and confident, without any numbers in the sentence itself. The evidence is implicit — knowledge of NBA history — rather than stated explicitly, which confused the model.
+
+**Error #2**
+> *"Also the comments about it happening against the Wizards… Kobe's 81 point game was against the 27-55 Raptors."*  
+> True: analysis | Predicted: hot_take | Confidence: 0.52
+
+This is ANALYSIS because it provides a specific, verifiable stat (27-55 Raptors record) to contextualize a comparison. The model got this wrong because the sentence is very short and reads as a snarky aside rather than a structured argument. DistilBERT appears to have learned that short punchy sentences equal hot_take, regardless of whether they contain verifiable evidence.
+
+**Error #3**
+> *"Jordan didn't have to face a dynasty like the Warriors. Yeah, because Jordan created and was the dynasty."*  
+> True: analysis | Predicted: hot_take | Confidence: 0.51
+
+This is ANALYSIS because it makes a logical counter-argument: the premise that Jordan avoided dynasties is false because Jordan himself was the dynasty others had to avoid. The model predicted HOT_TAKE because the sarcastic "Yeah, because" opener reads as a reactive dismissal. The model picked up on tone rather than the logical structure of the argument.
+
+**Common pattern across all 9 errors:** Every missed ANALYSIS was short, confident in phrasing, or structured as a rebuttal rather than a standalone argument. The model learned to associate assertive tone with HOT_TAKE and never learned that the same tone can carry analytical content. This is a data distribution problem — the training set did not contain enough short, sarcastic, or rebuttal-style ANALYSIS examples to teach the model that tone and argumentative structure are independent signals.
+
+**Is this a labeling problem or a data problem?** The labels on these 9 examples are consistent with the taxonomy — each one has specific verifiable evidence with a proportional conclusion. The issue is in the training data distribution: with only 59 ANALYSIS examples, the model never saw enough variety in how analytical posts are phrased to generalize beyond the obvious cases. More examples of short analytical rebuttals and sarcastic factual corrections would directly address this failure mode.
